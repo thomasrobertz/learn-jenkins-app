@@ -2,18 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Without Docker') {
-            steps {
-                // This will run in jenkins
-                sh '''
-                    echo "Hello without docker"
-                    ls -la
-                    touch not-in-container.txt
-                '''
-            }
-        }
-        
-        stage('With Docker') {
+        stage('Build') {
             agent {
                 // Need the docker plugin installed in jenkins
                 docker {
@@ -26,10 +15,12 @@ pipeline {
             steps {
                 // This will run inside docker
                 sh '''
-                    echo "Hello with docker"
                     ls -la
-                    touch in-container.txt
+                    node --version
                     npm --version
+                    npm ci
+                    npm run build
+                    ls -la
                 '''
             }
         }
