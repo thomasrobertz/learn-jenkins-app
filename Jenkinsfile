@@ -41,6 +41,23 @@ pipeline {
         }
     }
 
+    stage('e2e Test') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright/python:v1.44.0-jammy'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npm install serve
+                    node_modules/.bin/serve/serve -s build
+                    npx playwright test
+                '''
+            }
+        }
+    }
+
     post {
         always {
             junit 'test-results/junit.xml'
