@@ -25,6 +25,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Test') {
             agent {
                 docker {
@@ -39,9 +40,8 @@ pipeline {
                 '''
             }
         }
-    }
 
-    stage('e2e Test') {
+        stage('e2e Test') {
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright/python:v1.44.0-jammy'
@@ -57,6 +57,7 @@ pipeline {
                 '''
             }
         }
+    }
     }
 
     post {
