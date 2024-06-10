@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 // This will run inside docker
-                cleanWs()
+                //cleanWs()
                 sh '''
                     ls -la
                     node --version
