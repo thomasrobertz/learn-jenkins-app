@@ -61,7 +61,7 @@ pipeline {
 
     post {
         always {
-            junit 'jest-results/junit.xml'
+            junit testResullts: 'jest-results/junit.xml', skipPublishingChecks: true
         }
     }
 }
